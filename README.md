@@ -1,38 +1,56 @@
 # North.Cloud (north-cloud)
-North.Cloud gives you real-time savings, automated FinOps, and dynamic optimization across AWS and GCP. One platform built for control, savings, and scale. 
+
+North.Cloud delivers real-time savings, automated FinOps, and dynamic optimization across AWS and GCP. The platform's public API enables programmatic ingestion and retrieval of cost unit data so teams can integrate unit economics, allocation, and chargeback reporting into their own systems.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/north-cloud/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - API
+- FinOps
+- Cloud Cost Management
+- AWS
+- GCP
+- Cost Optimization
+- Cost Units
 
 ## Timestamps
 
-- **Created:** 2026-01-02 
-- **Modified:** 2026-03-16 
+- **Created:** 2026-01-02
+- **Modified:** 2026-04-28
 
 ## APIs
 
-### North.Cloud
-North.Cloud gives you real-time savings, automated FinOps, and dynamic optimization across AWS and GCP. One platform built for control, savings, and scale. 
+### North.Cloud Public API
 
-**Human URL:** [ https://www.north.cloud/]( https://www.north.cloud/)
+Programmatic access to push and retrieve cost unit data for FinOps and cloud cost optimization workflows across AWS and GCP. Authentication uses an API key passed in the `Authorization` header (`ApiKey north_api_{key}`), with `account_number` supplied as a query parameter on every request.
 
+**Human URL:** [https://www.north.cloud/](https://www.north.cloud/)
 
-#### Tags:
+**Base URL:** `https://api.north.cloud`
 
- - API
+#### Tags
+
+- FinOps
+- Cost Units
+- Cloud Cost
 
 #### Properties
 
-- [Documentation]( https://www.north.cloud/)
+- [Documentation](https://docs.north.cloud/)
+- [OpenAPI](openapi/north-cloud-openapi.yml)
+
+## Common Properties
+
+- [Website](https://www.north.cloud/)
+- [Documentation](https://docs.north.cloud/)
+- [Application](https://app.north.cloud/)
+- [Security](https://docs.north.cloud/security)
 
 ## Maintainers
 
