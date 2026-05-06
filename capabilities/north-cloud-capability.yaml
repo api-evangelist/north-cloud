@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: North.Cloud Public API
+  description: The North.Cloud Public API enables programmatic access to push and retrieve cost unit data for FinOps and cloud
+    cost optimization workflows across AWS and GCP. Cost units combine business units and cost identifiers to track metric
+    values over time, supporting unit economics, allocation, and chargeback reporting.
+  tags:
+  - North
+  - Cloud
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: north-cloud
+    baseUri: https://api.north.cloud
+    description: North.Cloud Public API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{NORTH_CLOUD_TOKEN}}'
+    resources:
+    - name: public-cost-units
+      path: /public/cost-units
+      operations:
+      - name: getcostunit
+        method: GET
+        description: Retrieve cost unit
+        inputParameters:
+        - name: costUnitId
+          in: query
+          type: string
+          required: true
+          description: Identifier combining business unit and cost unit (for example `bu-123:cu-456`).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecostunit
+        method: POST
+        description: Update cost unit data
+        inputParameters:
+        - name: replace
+          in: query
+          type: boolean
+          description: When true, replaces the cost unit's data set instead of merging.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: north-cloud-rest
+    description: REST adapter for North.Cloud Public API.
+    resources:
+    - path: /public/cost-units
+      name: getcostunit
+      operations:
+      - method: GET
+        name: getcostunit
+        description: Retrieve cost unit
+        call: north-cloud.getcostunit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /public/cost-units
+      name: updatecostunit
+      operations:
+      - method: POST
+        name: updatecostunit
+        description: Update cost unit data
+        call: north-cloud.updatecostunit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: north-cloud-mcp
+    transport: http
+    description: MCP adapter for North.Cloud Public API for AI agent use.
+    tools:
+    - name: getcostunit
+      description: Retrieve cost unit
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: north-cloud.getcostunit
+      with:
+        costUnitId: tools.costUnitId
+      inputParameters:
+      - name: costUnitId
+        type: string
+        description: Identifier combining business unit and cost unit (for example `bu-123:cu-456`).
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatecostunit
+      description: Update cost unit data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: north-cloud.updatecostunit
+      with:
+        replace: tools.replace
+      inputParameters:
+      - name: replace
+        type: boolean
+        description: When true, replaces the cost unit's data set instead of merging.
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    NORTH_CLOUD_TOKEN: NORTH_CLOUD_TOKEN
