@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/north-cloud-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Provide the API key as `ApiKey north_api_{your_key}`. Keys are created in Streams
+    -> API Keys within the North.Cloud application.
+  sources:
+  - openapi/north-cloud-openapi.yml

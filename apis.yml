@@ -37,6 +37,10 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/north-cloud/refs/heads/main/openapi/north-cloud-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/north-cloud-domain-security.yml
+  - type: Authentication
+    url: authentication/north-cloud-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/northcld
   - type: Website
@@ -47,6 +51,8 @@ common:
     url: https://app.north.cloud/
   - type: Security
     url: https://docs.north.cloud/security
+  - url: https://www.north.cloud/blog
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
