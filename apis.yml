@@ -37,6 +37,8 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/north-cloud/refs/heads/main/openapi/north-cloud-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/north-cloud-agentic-access.yml
   - type: DomainSecurity
     url: security/north-cloud-domain-security.yml
   - type: Authentication
