@@ -5,9 +5,22 @@ description: >-
   public API enables programmatic ingestion and retrieval of cost unit data so teams can integrate unit economics,
   allocation, and chargeback reporting into their own systems.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/north-cloud.png
 tags:
   - FinOps
   - Cloud Cost Management
@@ -20,22 +33,18 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/north-cloud/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: north-cloud:north-cloud
-    name: North.Cloud Public API
-    description: >-
-      Programmatic access to push and retrieve cost unit data for FinOps and cloud cost optimization workflows across
-      AWS and GCP.
-    humanURL: https://www.north.cloud/
-    baseURL: https://api.north.cloud
-    tags:
-      - FinOps
-      - Cost Units
-      - Cloud Cost
-    properties:
-      - type: Documentation
-        url: https://docs.north.cloud/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/north-cloud/refs/heads/main/openapi/north-cloud-openapi.yml
+- aid: north-cloud:north-cloud-cost-units-api
+  name: North.Cloud Cost Units API
+  description: Manage and retrieve cost unit metric data.
+  humanURL: https://www.north.cloud/
+  baseURL: https://api.north.cloud
+  tags:
+  - Cost Units
+  properties:
+  - type: OpenAPI
+    url: openapi/north-cloud-cost-units-api-openapi.yml
+  - type: Documentation
+    url: https://docs.north.cloud/
 common:
   - type: AgenticAccess
     url: agentic-access/north-cloud-agentic-access.yml
