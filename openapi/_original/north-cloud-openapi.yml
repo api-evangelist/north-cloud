@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: North.Cloud Public API
+  description: >-
+    The North.Cloud Public API enables programmatic access to push and retrieve
+    cost unit data for FinOps and cloud cost optimization workflows across AWS
+    and GCP. Cost units combine business units and cost identifiers to track
+    metric values over time, supporting unit economics, allocation, and
+    chargeback reporting.
+  version: 1.0.0
+  contact:
+    name: North.Cloud Support
+    url: https://docs.north.cloud/
+servers:
+  - url: https://api.north.cloud
+    description: Production API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Cost Units
+    description: Manage and retrieve cost unit metric data.
+paths:
+  /public/cost-units:
+    get:
+      summary: Retrieve cost unit
+      description: >-
+        Retrieves an existing cost unit including its current data points and
+        metadata. Requires the cost unit identifier and the account number to
+        scope the request.
+      operationId: getCostUnit
+      tags:
+        - Cost Units
+      parameters:
+        - $ref: '#/components/parameters/AccountNumber'
+        - name: costUnitId
+          in: query
+          required: true
+          description: Identifier combining business unit and cost unit (for example `bu-123:cu-456`).
+          schema:
+            type: string
+            example: bu-123:cu-456
+      responses:
+        '200':
+          description: Cost unit retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostUnitResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Update cost unit data
+      description: >-
+        Updates an existing cost unit with new metric data points. By default
+        new data points are merged with existing data; pass `replace=true` to
+        overwrite the cost unit data set entirely.
+      operationId: updateCostUnit
+      tags:
+        - Cost Units
+      parameters:
+        - $ref: '#/components/parameters/AccountNumber'
+        - name: replace
+          in: query
+          required: false
+          description: When true, replaces the cost unit's data set instead of merging.
+          schema:
+            type: boolean
+            default: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostUnitUpdateRequest'
+      responses:
+        '200':
+          description: Cost unit data accepted for processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Provide the API key as `ApiKey north_api_{your_key}`. Keys are created
+        in Streams -> API Keys within the North.Cloud application.
+  parameters:
+    AccountNumber:
+      name: account_number
+      in: query
+      required: true
+      description: North.Cloud account identifier scoping the request.
+      schema:
+        type: string
+  schemas:
+    CostUnitDataPoint:
+      type: object
+      required:
+        - date
+        - metric
+      properties:
+        date:
+          type: string
+          format: date
+          description: Measurement date in YYYY-MM-DD format.
+          example: '2026-01-15'
+        metric:
+          type: string
+          description: Numeric metric value as a decimal string.
+          example: '100.50'
+    CostUnitUpdateRequest:
+      type: object
+      required:
+        - costUnitId
+        - data
+      properties:
+        costUnitId:
+          type: string
+          description: Identifier combining business unit and cost unit.
+          example: bu-123:cu-456
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostUnitDataPoint'
+    CostUnitResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            costUnitId:
+              type: string
+            data:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of date to metric value.
+            metadata:
+              type: object
+              additionalProperties: true
+        error:
+          type: string
+          nullable: true
+    UpdateResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            datapointsProcessed:
+              type: integer
+            warnings:
+              type: array
+              items:
+                type: string
+        error:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        error:
+          type: string
+  responses:
+    BadRequest:
+      description: Request body or parameters invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing, invalid, expired, or revoked API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Cost unit not found for the supplied identifier.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

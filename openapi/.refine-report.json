@@ -1,0 +1,14 @@
+{
+  "provider": "north-cloud",
+  "sources": [
+    "north-cloud-cost-units-api-openapi.yml"
+  ],
+  "outputs": [
+    "north-cloud-cost-units-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
