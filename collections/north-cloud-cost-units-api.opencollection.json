@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "North.Cloud Public Cost Units API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cost Units",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve cost unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.north.cloud/public/cost-units",
+            "params": [
+              {
+                "name": "account_number",
+                "value": "",
+                "type": "query",
+                "description": "North.Cloud account identifier scoping the request."
+              },
+              {
+                "name": "costUnitId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier combining business unit and cost unit (for example `bu-123:cu-456`)."
+              }
+            ]
+          },
+          "docs": "Retrieves an existing cost unit including its current data points and metadata. Requires the cost unit identifier and the account number to scope the request."
+        },
+        {
+          "info": {
+            "name": "Update cost unit data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.north.cloud/public/cost-units",
+            "params": [
+              {
+                "name": "account_number",
+                "value": "",
+                "type": "query",
+                "description": "North.Cloud account identifier scoping the request."
+              },
+              {
+                "name": "replace",
+                "value": "",
+                "type": "query",
+                "description": "When true, replaces the cost unit's data set instead of merging."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing cost unit with new metric data points. By default new data points are merged with existing data; pass `replace=true` to overwrite the cost unit data set entirely."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

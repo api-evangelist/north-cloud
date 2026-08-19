@@ -1,0 +1,502 @@
+{
+  "item": [
+    {
+      "id": "639968fa-65c6-4714-9555-f494a0770e7d",
+      "name": "Cost Units",
+      "description": {
+        "content": "Manage and retrieve cost unit metric data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "168a157f-9328-44c3-9a25-edc568e89e05",
+          "name": "Retrieve cost unit",
+          "request": {
+            "name": "Retrieve cost unit",
+            "description": {
+              "content": "Retrieves an existing cost unit including its current data points and metadata. Requires the cost unit identifier and the account number to scope the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "cost-units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_number",
+                  "value": "<string>",
+                  "description": "(Required) North.Cloud account identifier scoping the request."
+                },
+                {
+                  "disabled": false,
+                  "key": "costUnitId",
+                  "value": "<string>",
+                  "description": "(Required) Identifier combining business unit and cost unit (for example `bu-123:cu-456`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00533586-6805-449d-8458-ee46e51665cb",
+              "name": "Cost unit retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "cost-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "costUnitId",
+                      "value": "bu-123:cu-456"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"string\",\n  \"data\": {\n    \"costUnitId\": \"string\",\n    \"data\": {\n      \"key_0\": \"string\"\n    },\n    \"metadata\": {\n      \"key_0\": 8197.737504847686\n    }\n  },\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f773c3f6-9683-4851-88ca-e1db61b91347",
+              "name": "Missing, invalid, expired, or revoked API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "cost-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "costUnitId",
+                      "value": "bu-123:cu-456"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e9fb8f8-9026-4a2c-81a8-269636e1fb65",
+              "name": "Cost unit not found for the supplied identifier.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "cost-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "costUnitId",
+                      "value": "bu-123:cu-456"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70178950-eca6-4f7b-9b9f-9fc2ca479a6a",
+          "name": "Update cost unit data",
+          "request": {
+            "name": "Update cost unit data",
+            "description": {
+              "content": "Updates an existing cost unit with new metric data points. By default new data points are merged with existing data; pass `replace=true` to overwrite the cost unit data set entirely.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "cost-units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_number",
+                  "value": "<string>",
+                  "description": "(Required) North.Cloud account identifier scoping the request."
+                },
+                {
+                  "disabled": false,
+                  "key": "replace",
+                  "value": "false",
+                  "description": "When true, replaces the cost unit's data set instead of merging."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"costUnitId\": \"<string>\",\n  \"data\": [\n    {\n      \"date\": \"<date>\",\n      \"metric\": \"<string>\"\n    },\n    {\n      \"date\": \"<date>\",\n      \"metric\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80c0a884-b8d5-4748-bbdb-6c6c7e7efa5f",
+              "name": "Cost unit data accepted for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "cost-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costUnitId\": \"bu-123:cu-456\",\n  \"data\": [\n    {\n      \"date\": \"2026-01-15\",\n      \"metric\": \"100.50\"\n    },\n    {\n      \"date\": \"2026-01-15\",\n      \"metric\": \"100.50\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"string\",\n  \"data\": {\n    \"datapointsProcessed\": 2066,\n    \"warnings\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5157f49-d76e-4e19-aff3-70a0e667c1d1",
+              "name": "Request body or parameters invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "cost-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costUnitId\": \"bu-123:cu-456\",\n  \"data\": [\n    {\n      \"date\": \"2026-01-15\",\n      \"metric\": \"100.50\"\n    },\n    {\n      \"date\": \"2026-01-15\",\n      \"metric\": \"100.50\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a68690d-792b-4879-a02e-ee8dd37b1063",
+              "name": "Missing, invalid, expired, or revoked API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "cost-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "replace",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"costUnitId\": \"bu-123:cu-456\",\n  \"data\": [\n    {\n      \"date\": \"2026-01-15\",\n      \"metric\": \"100.50\"\n    },\n    {\n      \"date\": \"2026-01-15\",\n      \"metric\": \"100.50\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\",\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.north.cloud",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "36b56ec2-3fa4-4b36-a5b5-293691b88d26",
+    "name": "North.Cloud Public Cost Units API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The North.Cloud Public API enables programmatic access to push and retrieve cost unit data for FinOps and cloud cost optimization workflows across AWS and GCP. Cost units combine business units and cost identifiers to track metric values over time, supporting unit economics, allocation, and chargeback reporting.\n\nContact Support:\n Name: North.Cloud Support",
+      "type": "text/plain"
+    }
+  }
+}
