@@ -1,0 +1,33 @@
+# Front Door AI Index — north-cloud — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: north-cloud
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.north.cloud
+  final_host: north.cloud
+  ownership: own
+  owner: north-cloud
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 24
+  host_score: 24
+  density: 15.51
+  words: 1547
+  tiers:
+    agentic: 4
+    core: 16
+    model: 4
+  ambiguous: 11
+  top_terms:
+    AI: 15
+    agent: 4
+    intelligence: 4
+    AI agent: 3
+    automation: 3
+    Anthropic: 2
+    OpenAI: 2
+    LLMs: 1
+    prompts: 1
