@@ -95,6 +95,21 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    CostUnitDataPoint:
+      type: object
+      required:
+      - date
+      - metric
+      properties:
+        date:
+          type: string
+          format: date
+          description: Measurement date in YYYY-MM-DD format.
+          example: '2026-01-15'
+        metric:
+          type: string
+          description: Numeric metric value as a decimal string.
+          example: '100.50'
     Error:
       type: object
       properties:
@@ -105,6 +120,30 @@ components:
           type: string
         error:
           type: string
+    CostUnitResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            costUnitId:
+              type: string
+            data:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of date to metric value.
+            metadata:
+              type: object
+              additionalProperties: true
+        error:
+          type: string
+          nullable: true
     CostUnitUpdateRequest:
       type: object
       required:
@@ -136,45 +175,6 @@ components:
               type: array
               items:
                 type: string
-        error:
-          type: string
-          nullable: true
-    CostUnitDataPoint:
-      type: object
-      required:
-      - date
-      - metric
-      properties:
-        date:
-          type: string
-          format: date
-          description: Measurement date in YYYY-MM-DD format.
-          example: '2026-01-15'
-        metric:
-          type: string
-          description: Numeric metric value as a decimal string.
-          example: '100.50'
-    CostUnitResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-        data:
-          type: object
-          properties:
-            costUnitId:
-              type: string
-            data:
-              type: object
-              additionalProperties:
-                type: string
-              description: Map of date to metric value.
-            metadata:
-              type: object
-              additionalProperties: true
         error:
           type: string
           nullable: true
