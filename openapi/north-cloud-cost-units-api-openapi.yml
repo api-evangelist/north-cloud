@@ -76,12 +76,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    BadRequest:
-      description: Request body or parameters invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing, invalid, expired, or revoked API key.
       content:
@@ -94,7 +88,51 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Request body or parameters invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    CostUnitUpdateRequest:
+      type: object
+      required:
+      - costUnitId
+      - data
+      properties:
+        costUnitId:
+          type: string
+          description: Identifier combining business unit and cost unit.
+          example: bu-123:cu-456
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostUnitDataPoint'
+    CostUnitResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            costUnitId:
+              type: string
+            data:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of date to metric value.
+            metadata:
+              type: object
+              additionalProperties: true
+        error:
+          type: string
+          nullable: true
     CostUnitDataPoint:
       type: object
       required:
@@ -120,44 +158,6 @@ components:
           type: string
         error:
           type: string
-    CostUnitResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-        data:
-          type: object
-          properties:
-            costUnitId:
-              type: string
-            data:
-              type: object
-              additionalProperties:
-                type: string
-              description: Map of date to metric value.
-            metadata:
-              type: object
-              additionalProperties: true
-        error:
-          type: string
-          nullable: true
-    CostUnitUpdateRequest:
-      type: object
-      required:
-      - costUnitId
-      - data
-      properties:
-        costUnitId:
-          type: string
-          description: Identifier combining business unit and cost unit.
-          example: bu-123:cu-456
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostUnitDataPoint'
     UpdateResponse:
       type: object
       properties:
