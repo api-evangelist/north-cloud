@@ -1,0 +1,26 @@
+slug: north-cloud
+provider: North.Cloud
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Cost Units
+  spec_file: north-cloud-cost-units-api-openapi.yml
+  capability_id: BC-600.80
+  capability_id_l1: BC-600
+  capability_name: IT Financial Management
+  confidence: 0.88
+  evidence: '''Cost units combine business units and cost identifiers to track metric values over time,
+    supporting unit economics, allocation, and chargeback reporting'' for ''FinOps and cloud cost optimization
+    workflows across AWS and GCP'''
+  reason: Cloud cost allocation, chargeback and optimisation is squarely IT Financial Management (IT spend,
+    chargeback/showback, IT cost optimisation).
