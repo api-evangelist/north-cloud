@@ -76,8 +76,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Missing, invalid, expired, or revoked API key.
+    BadRequest:
+      description: Request body or parameters invalid.
       content:
         application/json:
           schema:
@@ -88,27 +88,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Request body or parameters invalid.
+    Unauthorized:
+      description: Missing, invalid, expired, or revoked API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    AccountNumber:
+      name: account_number
+      in: query
+      required: true
+      description: North.Cloud account identifier scoping the request.
+      schema:
+        type: string
   schemas:
-    CostUnitUpdateRequest:
-      type: object
-      required:
-      - costUnitId
-      - data
-      properties:
-        costUnitId:
-          type: string
-          description: Identifier combining business unit and cost unit.
-          example: bu-123:cu-456
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostUnitDataPoint'
     CostUnitResponse:
       type: object
       properties:
@@ -133,31 +127,6 @@ components:
         error:
           type: string
           nullable: true
-    CostUnitDataPoint:
-      type: object
-      required:
-      - date
-      - metric
-      properties:
-        date:
-          type: string
-          format: date
-          description: Measurement date in YYYY-MM-DD format.
-          example: '2026-01-15'
-        metric:
-          type: string
-          description: Numeric metric value as a decimal string.
-          example: '100.50'
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-        message:
-          type: string
-        error:
-          type: string
     UpdateResponse:
       type: object
       properties:
@@ -178,14 +147,45 @@ components:
         error:
           type: string
           nullable: true
-  parameters:
-    AccountNumber:
-      name: account_number
-      in: query
-      required: true
-      description: North.Cloud account identifier scoping the request.
-      schema:
-        type: string
+    CostUnitDataPoint:
+      type: object
+      required:
+      - date
+      - metric
+      properties:
+        date:
+          type: string
+          format: date
+          description: Measurement date in YYYY-MM-DD format.
+          example: '2026-01-15'
+        metric:
+          type: string
+          description: Numeric metric value as a decimal string.
+          example: '100.50'
+    CostUnitUpdateRequest:
+      type: object
+      required:
+      - costUnitId
+      - data
+      properties:
+        costUnitId:
+          type: string
+          description: Identifier combining business unit and cost unit.
+          example: bu-123:cu-456
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostUnitDataPoint'
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        error:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
