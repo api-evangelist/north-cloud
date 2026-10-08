@@ -58,6 +58,12 @@ apis:
   - type: Documentation
     url: https://docs.north.cloud/
 common:
+  - type: Plans
+    url: plans/north-cloud-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/north-cloud-rate-limits.yml
+  - type: FinOps
+    url: finops/north-cloud-finops.yml
   - type: CapabilityMap
     url: capabilities/north-cloud-capability-edges.yml
     name: North.Cloud Business Capability Map
