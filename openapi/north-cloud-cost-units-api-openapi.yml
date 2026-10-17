@@ -75,6 +75,90 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  schemas:
+    CostUnitUpdateRequest:
+      type: object
+      required:
+      - costUnitId
+      - data
+      properties:
+        costUnitId:
+          type: string
+          description: Identifier combining business unit and cost unit.
+          example: bu-123:cu-456
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostUnitDataPoint'
+    UpdateResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            datapointsProcessed:
+              type: integer
+            warnings:
+              type: array
+              items:
+                type: string
+        error:
+          type: string
+          nullable: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        error:
+          type: string
+    CostUnitResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            costUnitId:
+              type: string
+            data:
+              type: object
+              additionalProperties:
+                type: string
+              description: Map of date to metric value.
+            metadata:
+              type: object
+              additionalProperties: true
+        error:
+          type: string
+          nullable: true
+    CostUnitDataPoint:
+      type: object
+      required:
+      - date
+      - metric
+      properties:
+        date:
+          type: string
+          format: date
+          description: Measurement date in YYYY-MM-DD format.
+          example: '2026-01-15'
+        metric:
+          type: string
+          description: Numeric metric value as a decimal string.
+          example: '100.50'
   responses:
     BadRequest:
       description: Request body or parameters invalid.
@@ -102,90 +186,6 @@ components:
       description: North.Cloud account identifier scoping the request.
       schema:
         type: string
-  schemas:
-    CostUnitResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-        data:
-          type: object
-          properties:
-            costUnitId:
-              type: string
-            data:
-              type: object
-              additionalProperties:
-                type: string
-              description: Map of date to metric value.
-            metadata:
-              type: object
-              additionalProperties: true
-        error:
-          type: string
-          nullable: true
-    UpdateResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-        data:
-          type: object
-          properties:
-            datapointsProcessed:
-              type: integer
-            warnings:
-              type: array
-              items:
-                type: string
-        error:
-          type: string
-          nullable: true
-    CostUnitDataPoint:
-      type: object
-      required:
-      - date
-      - metric
-      properties:
-        date:
-          type: string
-          format: date
-          description: Measurement date in YYYY-MM-DD format.
-          example: '2026-01-15'
-        metric:
-          type: string
-          description: Numeric metric value as a decimal string.
-          example: '100.50'
-    CostUnitUpdateRequest:
-      type: object
-      required:
-      - costUnitId
-      - data
-      properties:
-        costUnitId:
-          type: string
-          description: Identifier combining business unit and cost unit.
-          example: bu-123:cu-456
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostUnitDataPoint'
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-        message:
-          type: string
-        error:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
